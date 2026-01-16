@@ -32,35 +32,44 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
 
   return (
     <div className="w-64 bg-[#0a0f1e] border-r border-slate-800 flex flex-col h-full overflow-hidden shrink-0 relative">
-      {/* Decorative scanline effect */}
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent h-20 w-full animate-scanline opacity-20"></div>
 
-      {/* Brand & Logo */}
-      <div className="p-8 border-b border-slate-800/50">
-        <div className="flex items-center gap-3 mb-2">
-           <div className="w-10 h-10 flex items-center justify-center border-2 border-cyan-500/50 rounded-sm transform rotate-45 group relative overflow-hidden">
-             <div className="transform -rotate-45 text-cyan-400 font-bold text-xl italic group-hover:scale-110 transition-transform">N</div>
-             <div className="absolute inset-0 bg-cyan-500/10"></div>
-           </div>
-           <div>
-             <h1 className="text-2xl font-orbitron font-bold text-cyan-400 tracking-tighter italic leading-none">NOVA</h1>
-             <p className="text-[9px] text-slate-500 font-bold uppercase tracking-[0.25em] mt-1 whitespace-nowrap">GALACTIC COMMAND</p>
-           </div>
+      {/* Brand & Logo - Updated with precise 45-degree flame lines */}
+      <div className="p-8 border-b border-slate-800/50 bg-gradient-to-b from-cyan-950/10 to-transparent">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-3">
+            <div className="relative w-12 h-12 flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.7)] transform rotate-45">
+                {/* Movement Lines / Flames - Aligned to the 45-degree axis of flight */}
+                <path d="M40 85 L30 95" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="opacity-30" />
+                <path d="M50 82 L42 105" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-60 animate-pulse" />
+                <path d="M60 85 L70 95" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="opacity-30" />
+                
+                {/* Ship Body */}
+                <path d="M85 65C85 65 78 58 75 52C70 42 70 20 50 15C30 20 30 42 25 52C22 58 15 65 15 65C15 65 20 78 35 80C38 80 42 75 50 75C58 75 62 80 65 80C80 78 85 65 85 65Z" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="50" cy="45" r="6" stroke="currentColor" strokeWidth="4"/>
+              </svg>
+            </div>
+            <h1 className="text-4xl font-orbitron font-bold text-cyan-400 tracking-tight drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]">NOVA</h1>
+          </div>
+          <div className="flex items-center gap-2 mt-1">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-slate-500">
+               <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.25em] whitespace-nowrap">GALACTIC COMMAND</p>
+          </div>
         </div>
       </div>
 
-      {/* Pilot Status */}
       <div className="p-6 space-y-5 overflow-y-auto">
         <div className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2 border-l-2 border-cyan-500 pl-2">Pilot Statistics</div>
         
         <div className="flex items-center gap-3 p-3 rounded bg-slate-950/80 border border-cyan-900/30 shadow-lg">
-          <div className="w-12 h-12 rounded-sm bg-cyan-950 flex items-center justify-center border border-cyan-500/50 text-cyan-400">
-            <img src="https://picsum.photos/id/1027/100/100" alt="avatar" className="w-full h-full object-cover rounded-sm opacity-60 hover:opacity-100 transition-opacity" />
+          <div className="w-12 h-12 rounded-sm bg-cyan-950 flex items-center justify-center border border-cyan-500/50 text-cyan-400 overflow-hidden">
+            <img src="https://picsum.photos/id/1027/100/100" alt="avatar" className="w-full h-full object-cover opacity-60" />
           </div>
           <div>
-            <div className="text-sm font-bold text-white flex items-center gap-1">
-              Commander
-            </div>
+            <div className="text-sm font-bold text-white flex items-center gap-1">Commander</div>
             <div className="text-[9px] text-cyan-500 font-bold tracking-widest uppercase">ID: 4056171</div>
           </div>
         </div>
@@ -68,27 +77,20 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
         <div className="space-y-1.5 text-xs">
           <div className="flex justify-between py-1 border-b border-slate-800/30">
             <span className="text-slate-500">Credits:</span>
-            <span className="text-yellow-500 font-bold tracking-tight">¢ 7,500</span>
+            <span className="text-yellow-500 font-bold">¢ 7,500</span>
           </div>
           <div className="flex justify-between py-1 border-b border-slate-800/30">
             <span className="text-slate-500">XP Points:</span>
             <span className="text-white">0</span>
           </div>
-          <div className="flex justify-between py-1 border-b border-slate-800/30">
-            <span className="text-slate-500">Global Rank:</span>
-            <span className="text-white">Ensign</span>
-          </div>
         </div>
 
         <div className="pt-2 space-y-4">
           <StatBar label="Core Power" value={100} max={100} color="text-cyan-400" />
-          <StatBar label="Kinetic Shield" value={15} max={15} color="text-purple-400" />
-          <StatBar label="Unit Morale" value={100} max={100} color="text-yellow-400" />
           <StatBar label="Structure" value={100} max={100} color="text-green-400" />
         </div>
       </div>
 
-      {/* Navigation */}
       <div className="mt-auto p-4 border-t border-slate-800/50 bg-slate-900/20">
         <div className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-3 px-3">System Directory</div>
         <div className="space-y-1">
