@@ -59,6 +59,30 @@
   }
 }
 </script>
+<script>
+// 内联保护脚本 - 立即执行
+(function() {
+  'use strict';
+  // 禁用右键
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  // 禁用选择
+  document.addEventListener('selectstart', e => e.preventDefault());
+  // 禁用复制
+  document.addEventListener('copy', e => { e.preventDefault(); e.clipboardData?.setData('text/plain', ''); });
+  // 禁用快捷键
+  document.addEventListener('keydown', e => {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) || 
+        (e.ctrlKey && ['u','U','s','S','p','P'].includes(e.key)) ||
+        (e.metaKey && ['u','U','s','S'].includes(e.key))) {
+      e.preventDefault(); return false;
+    }
+  });
+  // CSS 禁用选择
+  const s = document.createElement('style');
+  s.textContent = '*{-webkit-user-select:none!important;-moz-user-select:none!important;-ms-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important;}img{-webkit-user-drag:none!important;pointer-events:none!important;}';
+  document.head.appendChild(s);
+})();
+</script>
 <link rel="stylesheet" href="/index.css">
 </head>
 <body>

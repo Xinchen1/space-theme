@@ -19,6 +19,33 @@ export default defineConfig(({ mode }) => {
         alias: {
           '@': path.resolve(__dirname, '.'),
         }
-      }
+      },
+      build: {
+        minify: 'terser',
+        terserOptions: {
+          compress: {
+            drop_console: true,
+            drop_debugger: true,
+            pure_funcs: ['console.log', 'console.info', 'console.debug'],
+          },
+          format: {
+            comments: false,
+          },
+          mangle: {
+            toplevel: true,
+            properties: {
+              regex: /^_/,
+            },
+          },
+        },
+        rollupOptions: {
+          output: {
+            manualChunks: undefined,
+            compact: true,
+          },
+        },
+        sourcemap: false,
+        chunkSizeWarningLimit: 1000,
+      },
     };
 });
